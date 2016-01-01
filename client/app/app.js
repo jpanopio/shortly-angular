@@ -9,19 +9,23 @@ angular.module('shortly', [
   $routeProvider
     .when('/signin', {
       templateUrl: 'app/auth/signin.html',
-      controller: 'AuthController'
+      controller: 'AuthController',
+      authenticate: false
     })
     .when('/signup', {
       templateUrl: 'app/auth/signup.html',
-      controller: 'AuthController'
+      controller: 'AuthController',
+      authenticate: false
     })
     .when('/links', {
       templateUrl: 'app/links/links.html',
-      controller: 'LinksController'
+      controller: 'LinksController',
+      authenticate: true
     })//.otherwise({ redirectTo: '/signin' })
     .when('/shorten', {
       templateUrl: 'app/shorten/shorten.html',
-      controller: 'ShortenController'
+      controller: 'ShortenController',
+      authenticate: true
     });
 
     // We add our $httpInterceptor into the array
@@ -55,12 +59,8 @@ angular.module('shortly', [
   // if it's not valid, we then redirect back to signin/signup
   $rootScope.$on('$routeChangeStart', function (evt, next, current) {    
     //console.log(Auth.isAuth());
-    if (next.$$route /*&& next.$$route.authenticate*/ && !Auth.isAuth()) {      
+    if (next.$$route && next.$$route.authenticate && !Auth.isAuth()) {      
       $location.path('/signin');
-    } else {
-      
-      //$location.path('/signin');
     }
-    
   });
 });
