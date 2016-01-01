@@ -38,6 +38,7 @@ describe('LinksController', function () {
     $httpBackend.flush();
 
     expect(Links.getAll.called).to.equal(true);
+
     Links.getAll.restore();
   });
 
@@ -47,7 +48,7 @@ describe('LinksController', function () {
 
     createController();
     $httpBackend.flush();
-
+    console.log('***********', $scope.data.links.$$state.value);
     expect($scope.data.links).to.deep.equal(mockLinks);
   });
 });
