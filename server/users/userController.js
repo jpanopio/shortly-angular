@@ -2,8 +2,8 @@ var User = require('./userModel.js');
     Q = require('q');
     jwt = require('jwt-simple');
 
-var findUser = Q.denodeify(User.findOne, User);
-var createUser = Q.denodeify(User.create, User);
+var findUser = Q.nbind(User.findOne, User);
+var createUser = Q.nbind(User.create, User);
 
 module.exports = {
   signin: function (req, res, next) {
@@ -32,16 +32,18 @@ module.exports = {
   },
 
   signup: function (req, res, next) {
+    console.log('Server side controller:', req.body.username, req.body.password);
     var username = req.body.username;
     var password = req.body.password;
 
-    // check to see if user already exists
+    // check to see if user already exists    
     findUser({username: username})
-      .then(function (user) {
+      .then(function (user) {        
         if (user) {
           next(new Error('User already exist!'));
         } else {
           // make a new user if not one
+          console.log('here!!!');
           return createUser({
             username: username,
             password: password
