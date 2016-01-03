@@ -1,14 +1,11 @@
 <div id='container'>
   <a href="#/shorten">Go to shorten</a>
-  <!-- <div ngInit='getAll()'></div> -->
-  <!-- <div id='signin'>
-    <h1>signin</h1>
-    <form name="signinForm" ng-submit='signin()'>
-      <input type='text'ng-model='user.username'>
-      <input type="password" ng-model='user.password'>
-      <button>signin</button>
-    </form>
-    <a href="#/signup">Don't have an account? <strong>Signup</strong> ...</a>
-  </div> -->
-
+  <input type='text' ng-model='search' placeholder='filter' />
+  <ul ng-repeat="link in data.links | filter:search | orderBy:'-visits'">
+    <li class='link'>
+      <img class='link' src='../assets/redirect_icon.png' /> 
+      <a href=' {{ link.base_url + "/" + link.code }} ' >{{ link.base_url + '/' + link.code }}</a>
+      <span class="link visits count">{{ link.visits }}</span>
+    </li>
+  </ul>
 </div>

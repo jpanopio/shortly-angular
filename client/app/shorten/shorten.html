@@ -1,12 +1,11 @@
 <div id='container'>
 <!-- Your code here -->
-  <h1>shorten</h1>
 
   <form name="shortenForm" ng-submit='addLink()'>
-    <input type='text' ng-model='link'>
+    <input type='text' ng-model='link.url' />
     <input type='submit'>
   </form>
-  <div ng-model='error'>{{ error }}</div>
+  <div>{{ error }}</div>
 
   <a href='#/links'>Go to links</a>
 </div>

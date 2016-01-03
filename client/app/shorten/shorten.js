@@ -6,14 +6,13 @@ angular.module('shortly.shorten', [])
   $scope.addLink = function (link) {
     //$scope.link[link] = link; 
     // console.log($scope.link);
-  
-    var responseBody = Links.addOne({url: $scope.link })
+    var responseBody = Links.addOne({url: $scope.link.url })
+      .then(function() {
+        window.location.href="#links";
+      })
       .catch(function(result) {
         console.log(result.data.error);
         $scope.error = result.data.error;
-      });
-    // console.log(responseBody);
-    // begin forming the request
-    // attach the token to the reqeust    
+      }); 
   };
 });

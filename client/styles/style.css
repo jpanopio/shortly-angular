@@ -26,6 +26,9 @@ h1 {
   padding: 0;
   list-style: none;
 }
+ul {
+  list-style-type: none;
+}
 
 .navigation li {
   float: left;
